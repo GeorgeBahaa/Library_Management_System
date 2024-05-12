@@ -2,14 +2,12 @@ package com.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.library.exception.PatronException;
 import com.library.model.Patron;
 import com.library.repository.PatronRepository;
-import com.library.security.PatronDetails;
 
 @Service
 public class PatronLoginService {
@@ -29,10 +27,10 @@ public class PatronLoginService {
         }
     }
 
-    public UserDetails login(String email, String password) {
+    public Patron login(String email, String password) {
         Patron patron = patronRepository.findByEmail(email);
         if (patron != null && passwordEncoder.matches(password, patron.getPassword())) {
-            return new PatronDetails(patron);
+            return patron;
         } else {
             throw new PatronException("Invalid email or password");
         }
