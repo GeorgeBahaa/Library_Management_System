@@ -16,7 +16,6 @@ The Library Management System API facilitates the management of books, patrons, 
  ##### - **Open src/main/resources/application.properties.**
 
  ##### - **Configure JWT settings**
-        jwt.secret = mySecretKey 
         jwt.expiration = 600000
 
 The application will start running at http://localhost:8090.

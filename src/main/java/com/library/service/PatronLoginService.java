@@ -19,21 +19,20 @@ public class PatronLoginService {
     private PasswordEncoder passwordEncoder;
 
     public Patron registerPatron(Patron patron) {
-        try{
+        try {
             patron.setPassword(passwordEncoder.encode(patron.getPassword()));
-        return patronRepository.save(patron);
-        } catch (DataIntegrityViolationException e){
+            return patronRepository.save(patron);
+        } catch (DataIntegrityViolationException e) {
             throw new PatronException("Failed to register the Patron.");
         }
     }
 
-    public Patron login(String email, String password) {
+    public boolean login(String email, String password) {
         Patron patron = patronRepository.findByEmail(email);
         if (patron != null && passwordEncoder.matches(password, patron.getPassword())) {
-            return patron;
+            return true;
         } else {
             throw new PatronException("Invalid email or password");
         }
     }
-
 }

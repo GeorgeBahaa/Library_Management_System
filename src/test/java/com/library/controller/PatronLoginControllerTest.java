@@ -45,5 +45,4 @@ public class PatronLoginControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(patron.getEmail()));
     }
-
 }
